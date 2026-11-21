@@ -3,10 +3,10 @@
 <p align="center"><b>Install NetBox on an Ubuntu server over SSH with one click</b></p>
 
 <p align="center">
-  ![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
-  ![Platform](https://img.shields.io/badge/platform-Windows-0078D6?logo=windows&logoColor=white)
-  ![Updated](https://img.shields.io/badge/updated-2025-12-23-success)
-  [![Releases](https://img.shields.io/badge/downloads-Releases-blue)](https://github.com/alisadhk/netbox-auto-hk-installer/releases/latest)
+  <img src="https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/platform-Windows-0078D6?logo=windows&logoColor=white" alt="Platform">
+  <img src="https://img.shields.io/badge/updated-2025--12--23-success" alt="Updated">
+  <a href="https://github.com/alisadhk/netbox-auto-hk-installer/releases/latest"><img src="https://img.shields.io/badge/downloads-Releases-blue" alt="Releases"></a>
 </p>
 
 ---
@@ -19,6 +19,21 @@ A PyQt5 wizard that connects to a fresh Ubuntu server over SSH (paramiko) and in
 - Random secret key and database password generation
 - Live execution log with progress bar
 - Stop button and installation summary
+- Installs PostgreSQL, Redis and the Python environment automatically
+- Creates the database and user with a random password
+- Generates the NetBox secret key for you
+
+## How it works
+- The installer connects over SSH and runs pt update plus the required packages (Python, PostgreSQL, Redis, build tools).
+- It creates the 
+etbox database and user, downloads NetBox, prepares a Python virtual environment and writes the configuration with a generated secret key.
+- It runs the migrations, enables the services and publishes the web interface over HTTPS.
+- The log ends with **Installation Complete** and the address to open.
+
+## Requirements
+- Fresh Ubuntu server with SSH and sudo/root access.
+- Outbound Internet on the server (apt and GitHub).
+- Windows 10/11 for the installer GUI.
 
 ## Screenshots
 <p align="center"><img src="screenshots/screenshot-1.png" alt="NetBox Auto-HK Installer screenshot" width="720"></p>
@@ -54,6 +69,11 @@ python fff.py
 
 ## Configuration and privacy
 - All sensitive values from the original private version (passwords, tokens, license codes, user names, internal IP addresses, personal names and links) were replaced with `*****`.
+
+## Troubleshooting
+- Stops at PostgreSQL: wait for the service, then run again; the log shows the exact step.
+- Web page not reachable: check the server firewall for ports 80/443.
+- Browser certificate warning: expected with a self-signed certificate.
 
 ## Build the executable yourself
 ```bash
